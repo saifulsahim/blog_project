@@ -208,6 +208,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item mt-auto">
+                        <a href="{{ url('/') }}" class="btn btn-primary text-white" target="_blank">
+                            <p class="mb-0">
+                                View Website
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

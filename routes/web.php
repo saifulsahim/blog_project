@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\FrontEndController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,17 +20,24 @@ Auth::routes();
 //    return view('welcome');
 //});
 
-Route::get('/', function () {
-    return view('website.home');
-});
+//Route::get('/', function () {
+//    return view('website.home');
+//});
+//
+//Route::get('/category', function () {
+//    return view('website.category');
+//});
+//
+//Route::get('/post', function () {
+//    return view('website.post');
+//});
+Route::get('/', [App\Http\Controllers\FrontEndController::class, 'home']);
+Route::get('/category/{slug}', 'FrontEndController@category')->name('website.category');
+Route::get('/contact', 'FrontEndController@contact')->name('website.contact');
+Route::get('/post/{slug}', [App\Http\Controllers\FrontEndController::class, 'post'])->name('website.post');
 
-Route::get('/category', function () {
-    return view('website.category');
-});
 
-Route::get('/post', function () {
-    return view('website.post');
-});
+
 // Admin panel routes
 Route::group(['prefix'=> 'admin','middleware'=>['auth']],function (){
 Route::get('/dashboard', function () {

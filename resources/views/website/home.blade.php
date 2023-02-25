@@ -60,185 +60,37 @@
                 </div>
             </div>
             <div class="row">
+                @foreach($recentPosts as $post)
                 <div class="col-lg-4 mb-4">
                     <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
+                        <h2><a href="{{route('website.post',['slug'=>$post->slug])}}"><img src="{{$post->image}}" alt="Image" class="img-fluid rounded"></a></h2>
                         <div class="excerpt">
-                            <span class="post-category text-white bg-secondary mb-3">Politics</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
+                            <span class="post-category text-white bg-secondary mb-3">{{ $post->category->name }}</span>
+                            <h2><a href="{{route('website.post',['slug'=>$post->slug])}}">{{ $post->title }}</a></h2>
                             <div class="post-meta align-items-center text-left clearfix">
                                 <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
+                                <span class="d-inline-block mt-1">By <a href="#">{{$post->user->name}}</a></span>
+                                <span>&nbsp;-&nbsp; {{$post->created_at->format('M d, Y')}}</span>
                             </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
+                            <p>{{Str::limit($post->description,100)}}</p>
+                            <p><a href="{{route('website.post',['slug'=>$post->slug])}}">Read More</a></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
-                        <div class="excerpt">
-                            <span class="post-category text-white bg-success mb-3">Nature</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
-                            <div class="post-meta align-items-center text-left clearfix">
-                                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_3.jpg" alt="Image" class="img-fluid rounded"></a>
-                        <div class="excerpt">
-                            <span class="post-category text-white bg-warning mb-3">Travel</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
-                            <div class="post-meta align-items-center text-left clearfix">
-                                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4 mb-4">
-                    <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
-                        <div class="excerpt">
-                            <span class="post-category text-white bg-secondary mb-3">Politics</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
-                            <div class="post-meta align-items-center text-left clearfix">
-                                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
-                        <div class="excerpt">
-                            <span class="post-category text-white bg-success mb-3">Nature</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
-                            <div class="post-meta align-items-center text-left clearfix">
-                                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
-                        <div class="excerpt">
-                            <span class="post-category text-white bg-danger mb-3">Sports</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
-                            <div class="post-meta align-items-center text-left clearfix">
-                                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4 mb-4">
-                    <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
-                        <div class="excerpt">
-                            <span class="post-category text-white bg-success mb-3">Nature</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
-                            <div class="post-meta align-items-center text-left clearfix">
-                                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_2.jpg" alt="Image" class="img-fluid rounded"></a>
-                        <div class="excerpt">
-                            <span class="post-category text-white bg-danger mb-3">Sports</span>
-                            <span class="post-category text-white bg-secondary mb-3">Tech</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
-                            <div class="post-meta align-items-center text-left clearfix">
-                                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="entry2">
-                        <a href="post.blade.php"><img src="{{asset('website_assets')}}/images/img_4.jpg" alt="Image" class="img-fluid rounded"></a>
-                        <div class="excerpt">
-                            <span class="post-category text-white bg-danger mb-3">Sports</span>
-                            <span class="post-category text-white bg-warning mb-3">Lifestyle</span>
-
-                            <h2><a href="post.blade.php">The AI magically removes moving objects from videos.</a></h2>
-                            <div class="post-meta align-items-center text-left clearfix">
-                                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                                <span class="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
-                                <span>&nbsp;-&nbsp; July 19, 2019</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                            <p><a href="#">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="row text-center pt-5 border-top">
-                <div class="col-md-12">
-                    <div class="custom-pagination">
-                        <span>1</span>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <span>...</span>
-                        <a href="#">15</a>
-                    </div>
-                </div>
+                {{$recentPosts->links()}}
+{{--                <div class="col-md-12">--}}
+{{--                    <div class="custom-pagination">--}}
+{{--                        <span>1</span>--}}
+{{--                        <a href="#">2</a>--}}
+{{--                        <a href="#">3</a>--}}
+{{--                        <a href="#">4</a>--}}
+{{--                        <span>...</span>--}}
+{{--                        <a href="#">15</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>
@@ -292,20 +144,4 @@
     </div>
 
 
-    <div class="site-section bg-lightx">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-5">
-                    <div class="subscribe-1 ">
-                        <h2>Subscribe to our newsletter</h2>
-                        <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit nesciunt error illum a explicabo, ipsam nostrum.</p>
-                        <form action="#" class="d-flex">
-                            <input type="text" class="form-control" placeholder="Enter your email address">
-                            <input type="submit" class="btn btn-primary" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
