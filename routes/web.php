@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,12 +32,11 @@ Route::get('/post', function () {
 });
 // Admin panel routes
 Route::group(['prefix'=> 'admin','middleware'=>['auth']],function (){
-
-
 Route::get('/dashboard', function () {
     return view('admin.dashboard.index');
 });
     Route::resource('category',CategoryController::class);
+    Route::resource('post',PostController::class);
 });
 
 /*
