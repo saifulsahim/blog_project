@@ -194,7 +194,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('post.index')}}" class="nav-link">
-                                    <i class="nav-icon fas fa-tags"></i>
+                                    <i class="nav-icon fas fa-pen"></i>
                                     <p>Post</p>
                                 </a>
                             </li>
@@ -253,11 +253,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('admin')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('admin')}}/js/adminlte.min.js"></script>
+<script src="{{asset('admin')}}/js/bs-custom-file-input.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     @if(Session::has('success'))
         toastr.success("{{Session::get('success')}}");
         @endif
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        })
 </script>
 </body>
 </html>

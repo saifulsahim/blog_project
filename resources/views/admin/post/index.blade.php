@@ -33,24 +33,27 @@
                                 <thead>
                                 <tr>
 
-                                    <th>Name</th>
-                                    <th>Slug</th>
-                                    <th>Post comment</th>
-                                    <th>Slug</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Image</th>
+                                    <th>Author</th>
                                     <th style="width: 40px">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                @if($posts->count())
                                 @foreach($posts as $post)
                                     <tr>
-                                        <td>{{$post->id}}</td>
-                                        <td>{{$post->name}}</td>
-                                        <td>{{$post->slug}}</td>
+                                        <td>{{$post->title}}</td>
+                                        <td>{{$post->category->name}}</td>
                                         <td>
-                                            {{$post->id}}
+                                            <div style="max-width: 70px;max-height: 70px;overflow: hidden">
+                                                <img src="{{asset($post->image)}}" class="img-fluid" alt="">
+                                            </div>
                                         </td>
+                                        <td>{{$post->user->name}}</td>
                                         <td class="d-flex">
+                                            <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-success mr-1"> <i class="fas fa-eye"></i> </a>
                                             <a href="{{route('post.edit',[$post->id])}}" class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
                                             <form action="{{route('post.destroy',[$post->id])}}" class="mr-1" method="post">
                                                 @method('DELETE')
@@ -58,7 +61,6 @@
                                                 <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
 
                                             </form>
-                                            {{--                                            <a href="{{route('post.show',[$post->id])}}" class="btn btn-sm btn-success mr-1"><i class="fas fa-eye"></i></a>--}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -68,6 +70,7 @@
                                             <h5 class="text-center">no post found</h5>
                                         </td>
                                     </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>
