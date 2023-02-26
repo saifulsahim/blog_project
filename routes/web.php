@@ -35,6 +35,8 @@ Route::get('/', [App\Http\Controllers\FrontEndController::class, 'home']);
 Route::get('/category/{slug}', 'FrontEndController@category')->name('website.category');
 Route::get('/contact', 'FrontEndController@contact')->name('website.contact');
 Route::get('/post/{slug}', [App\Http\Controllers\FrontEndController::class, 'post'])->name('website.post');
+Route::post('/add_comment}', [App\Http\Controllers\FrontEndController::class, 'add_comment'])->name('website.comment');
+Route::post('/add_reply}', [App\Http\Controllers\FrontEndController::class, 'add_reply'])->name('website.reply');
 
 
 

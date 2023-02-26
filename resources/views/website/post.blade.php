@@ -39,107 +39,56 @@
 
             <div class="pt-5">
               <h3 class="mb-5">6 Comments</h3>
+                @foreach($comments as $comment)
               <ul class="comment-list">
                 <li class="comment">
                   <div class="vcard">
                     <img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
-                    <h3>Jean Doe</h3>
+                    <h3>{{$comment->name}}</h3>
+                    <p>{{$comment->comment}}</p>
                     <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply rounded">Reply</a></p>
+                    <p><a href="javascript:void(0)" onclick="reply(this)" class="reply rounded heelo" data-Commentid="{{$comment->id}}">Reply</a></p>
                   </div>
                 </li>
-
-                <li class="comment">
-                  <div class="vcard">
-                    <img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply rounded">Reply</a></p>
-                  </div>
-
+                  @foreach($replies as $reply)
+                      @if($reply->comment_id == $comment->id)
                   <ul class="children">
-                    <li class="comment">
-                      <div class="vcard">
-                        <img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image placeholder">
-                      </div>
-                      <div class="comment-body">
-                        <h3>Jean Doe</h3>
-                        <div class="meta">January 9, 2018 at 2:21pm</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply rounded">Reply</a></p>
-                      </div>
-
-
-                      <ul class="children">
-                        <li class="comment">
+                      <li class="comment">
                           <div class="vcard">
-                            <img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image placeholder">
+                              <img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image placeholder">
                           </div>
                           <div class="comment-body">
-                            <h3>Jean Doe</h3>
-                            <div class="meta">January 9, 2018 at 2:21pm</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                            <p><a href="#" class="reply rounded">Reply</a></p>
+                              <h3>{{$reply->name}}</h3>
+                              <div class="meta">January 9, 2018 at 2:21pm</div>
+                              <p>{{$reply->reply}}</p>
+                              <p><a href="javascript:void(0)" onclick="reply(this)" class="reply rounded heelo" data-Commentid="{{$comment->id}}">Reply</a></p>
                           </div>
-
-                            <ul class="children">
-                              <li class="comment">
-                                <div class="vcard">
-                                  <img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                  <h3>Jean Doe</h3>
-                                  <div class="meta">January 9, 2018 at 2:21pm</div>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                  <p><a href="#" class="reply rounded">Reply</a></p>
-                                </div>
-                              </li>
-                            </ul>
-                        </li>
-                      </ul>
-                    </li>
+                      </li>
                   </ul>
-                </li>
+                      @endif
+                  @endforeach
 
-                <li class="comment">
-                  <div class="vcard">
-                    <img src="{{asset('website_assets')}}/images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply rounded">Reply</a></p>
-                  </div>
-                </li>
               </ul>
+                @endforeach
               <!-- END comment-list -->
 
               <div class="comment-form-wrap pt-5">
                 <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="p-5 bg-light">
+                <form action="{{route('website.comment')}}" method="post" class="p-5 bg-light">
+                    @csrf
+{{--                  <div class="form-group">--}}
+{{--                    <label for="name">Name *</label>--}}
+{{--                    <input type="text" class="form-control" id="name">--}}
+{{--                  </div>--}}
+{{--                  <div class="form-group">--}}
+{{--                    <label for="email">Email *</label>--}}
+{{--                    <input type="email" class="form-control" id="email">--}}
+{{--                  </div>--}}
                   <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                    <label for="message">Comment</label>
+                    <textarea name="comment" id="message" cols="30" rows="10" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
                     <input type="submit" value="Post Comment" class="btn btn-primary">
@@ -147,6 +96,16 @@
 
                 </form>
               </div>
+                <div style="display:none" class="replyDiv p-5">
+                    <form action="{{route('website.reply')}}" method="post">
+                        <input type="text" id="Commentid" name="Commentid" hidden="">
+                        @csrf
+                    <textarea name="reply"  style="height: 100px; width: 500px" placeholder="Write here"></textarea>
+                    <br>
+                    <button type="submit"   class="btn btn-primary" >Reply</button>
+                    <a type="submit" href="javascript:void(0);"  class="btn btn-primary" onclick="reply_close(this)">Close</a>
+                    </form>
+                </div>
             </div>
 
           </div>
@@ -163,175 +122,32 @@
               </form>
             </div>
             <!-- END sidebar-box -->
-            <div class="sidebar-box">
-              <div class="bio text-center">
-                <img src="{{asset('website_assets')}}/images/person_2.jpg" alt="Image Placeholder" class="img-fluid mb-5">
-                <div class="bio-body">
-                  <h2>Craig David</h2>
-                  <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
-                  <p><a href="#" class="btn btn-primary btn-sm rounded px-4 py-2">Read my bio</a></p>
-                  <p class="social">
-                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- END sidebar-box -->
-            <div class="sidebar-box">
-              <h3 class="heading">Popular Posts</h3>
-              <div class="post-entry-sidebar">
-                <ul>
-                  <li>
-                    <a href="">
-                      <img src="{{asset('website_assets')}}/images/img_1.jpg" alt="Image placeholder" class="mr-4">
-                      <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                        <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      <img src="{{asset('website_assets')}}/images/img_2.jpg" alt="Image placeholder" class="mr-4">
-                      <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                        <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      <img src="{{asset('website_assets')}}/images/img_3.jpg" alt="Image placeholder" class="mr-4">
-                      <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                        <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+
             <!-- END sidebar-box -->
 
-            <div class="sidebar-box">
-              <h3 class="heading">Categories</h3>
-              <ul class="categories">
-                <li><a href="#">Food <span>(12)</span></a></li>
-                <li><a href="#">Travel <span>(22)</span></a></li>
-                <li><a href="#">Lifestyle <span>(37)</span></a></li>
-                <li><a href="#">Business <span>(42)</span></a></li>
-                <li><a href="#">Adventure <span>(14)</span></a></li>
-              </ul>
-            </div>
             <!-- END sidebar-box -->
 
-            <div class="sidebar-box">
-              <h3 class="heading">Tags</h3>
-              <ul class="tags">
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Adventure</a></li>
-                <li><a href="#">Food</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Freelancing</a></li>
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Adventure</a></li>
-                <li><a href="#">Food</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Freelancing</a></li>
-              </ul>
-            </div>
           </div>
           <!-- END sidebar -->
 
         </div>
       </div>
     </section>
-
-    <div class="site-section bg-light">
-      <div class="container">
-
-        <div class="row mb-5">
-          <div class="col-12">
-            <h2>More Related Posts</h2>
-          </div>
-        </div>
-
-        <div class="row align-items-stretch retro-layout">
-
-          <div class="col-md-5 order-md-2">
-            <a href="single.html" class="hentry img-1 h-100 gradient" style="background-image: url('{{asset('website_assets')}}/images//img_4.jpg');">
-              <span class="post-category text-white bg-danger">Travel</span>
-              <div class="text">
-                <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                <span>February 12, 2019</span>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-7">
-
-            <a href="single.html" class="hentry img-2 v-height mb30 gradient" style="background-image: url('{{asset('website_assets')}}/images//img_1.jpg');">
-              <span class="post-category text-white bg-success">Nature</span>
-              <div class="text text-sm">
-                <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                <span>February 12, 2019</span>
-              </div>
-            </a>
-
-            <div class="two-col d-block d-md-flex">
-              <a href="single.html" class="hentry v-height img-2 gradient" style="background-image: url('{{asset('website_assets')}}/images//img_2.jpg');">
-                <span class="post-category text-white bg-primary">Sports</span>
-                <div class="text text-sm">
-                  <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                  <span>February 12, 2019</span>
-                </div>
-              </a>
-              <a href="single.html" class="hentry v-height img-2 ml-auto gradient" style="background-image: url('{{asset('website_assets')}}/images//img_3.jpg');">
-                <span class="post-category text-white bg-warning">Lifestyle</span>
-                <div class="text text-sm">
-                  <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                  <span>February 12, 2019</span>
-                </div>
-              </a>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-
-    <div class="site-section bg-lightx">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-md-5">
-            <div class="subscribe-1 ">
-              <h2>Subscribe to our newsletter</h2>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit nesciunt error illum a explicabo, ipsam nostrum.</p>
-              <form action="#" class="d-flex">
-                <input type="text" class="form-control" placeholder="Enter your email address">
-                <input type="submit" class="btn btn-primary" value="Subscribe">
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-
   </div>
+    <script type="text/javascript">
+        function reply(caller)
+        {
+            //console.log($(this).data);
+           // console.log  ($('.heelo').data('Commentid')) ;
+           document.getElementById('Commentid').value=$(caller).attr('data-Commentid');
+            $('.replyDiv').insertAfter($(caller));
+            $('.replyDiv').show();
+        }
+        function reply_close(caller)
+        {
+            $('.replyDiv').hide();
+        }
+
+
+    </script>
 @endsection
