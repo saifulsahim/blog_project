@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('comment_id')->nullable();
+            $table->string('post_id')->nullable();
             $table->string('reply')->nullable();
             $table->string('user_id')->nullable();
+            $table->string('post_id')->nullable();
             $table->timestamps();
         });
     }

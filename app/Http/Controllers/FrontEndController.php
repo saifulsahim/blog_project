@@ -21,8 +21,9 @@ class FrontEndController extends Controller
     {
         $post = Post::with('category', 'user')->where('slug', $slug)->first();
         if($post){
-            $comments = Comment::orderBy('id','desc')->get();
-            $replies = Reply::all();
+            $comments = Comment::orderBy('id','desc')->where('post_id',$post->id)->get();
+            $replies = Reply::orderBy('id','asc')->where('post_id',$post->id)->get();
+           //$replies = Reply::all();
             return view('website.post',compact('post','comments','replies'));
         }else{
             return redirect('/');
@@ -40,6 +41,8 @@ class FrontEndController extends Controller
         $comment->name = Auth::user()->name;
         $comment->user_id = Auth::user()->id;
         $comment->comment = $request->comment;
+        $comment->post_id = $request->post_id;
+        //dd($comment);
         $comment->save();
         return redirect()->back();
 
@@ -56,10 +59,11 @@ class FrontEndController extends Controller
     {
         //dd($request);
         if (Auth::id()) {
-            $reply =  new Reply;
+            $reply = new Reply;
             $reply->name = Auth::user()->name;
             $reply->user_id = Auth::user()->id;
             $reply->comment_id = $request->Commentid;
+            $reply->post_id = $request->post_id;
             $reply->reply = $request->reply;
            // dd($reply);
             $reply->save();
@@ -70,5 +74,9 @@ class FrontEndController extends Controller
         }
     }
 
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/login');
+    }
 
 }

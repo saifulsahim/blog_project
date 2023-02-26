@@ -38,7 +38,7 @@
 
 
             <div class="pt-5">
-              <h3 class="mb-5">6 Comments</h3>
+{{--              <h3 class="mb-5">6 Comments</h3>--}}
                 @foreach($comments as $comment)
               <ul class="comment-list">
                 <li class="comment">
@@ -48,12 +48,12 @@
                   <div class="comment-body">
                     <h3>{{$comment->name}}</h3>
                     <p>{{$comment->comment}}</p>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                    <div class="meta">{{$comment->created_at->format('M d,Y')}}</div>
                     <p><a href="javascript:void(0)" onclick="reply(this)" class="reply rounded heelo" data-Commentid="{{$comment->id}}">Reply</a></p>
                   </div>
                 </li>
                   @foreach($replies as $reply)
-                      @if($reply->comment_id == $comment->id)
+                      @if($reply->comment_id == $comment->id && $reply->post_id == $comment->post_id)
                   <ul class="children">
                       <li class="comment">
                           <div class="vcard">
@@ -61,9 +61,9 @@
                           </div>
                           <div class="comment-body">
                               <h3>{{$reply->name}}</h3>
-                              <div class="meta">January 9, 2018 at 2:21pm</div>
+                              <div class="meta">{{$reply->created_at->format('M d,Y')}}</div>
                               <p>{{$reply->reply}}</p>
-                              <p><a href="javascript:void(0)" onclick="reply(this)" class="reply rounded heelo" data-Commentid="{{$comment->id}}">Reply</a></p>
+                              <p><a href="javascript:void(0)" onclick="reply(this)" class="reply rounded " data-Commentid="{{$comment->id}}">Reply</a></p>
                           </div>
                       </li>
                   </ul>
@@ -92,6 +92,7 @@
                   </div>
                   <div class="form-group">
                     <input type="submit" value="Post Comment" class="btn btn-primary">
+                    <input type="text" value="{{$post->id}}" name="post_id" class="btn btn-primary" hidden>
                   </div>
 
                 </form>
@@ -99,6 +100,7 @@
                 <div style="display:none" class="replyDiv p-5">
                     <form action="{{route('website.reply')}}" method="post">
                         <input type="text" id="Commentid" name="Commentid" hidden="">
+                        <input type="text" value="{{$post->id}}" id="post_id" name="post_id" hidden="">
                         @csrf
                     <textarea name="reply"  style="height: 100px; width: 500px" placeholder="Write here"></textarea>
                     <br>

@@ -38,7 +38,7 @@ Route::get('/post/{slug}', [App\Http\Controllers\FrontEndController::class, 'pos
 Route::post('/add_comment}', [App\Http\Controllers\FrontEndController::class, 'add_comment'])->name('website.comment');
 Route::post('/add_reply}', [App\Http\Controllers\FrontEndController::class, 'add_reply'])->name('website.reply');
 
-
+Route::get('/logout', [App\Http\Controllers\FrontEndController::class, 'logout']);
 
 // Admin panel routes
 Route::group(['prefix'=> 'admin','middleware'=>['auth']],function (){

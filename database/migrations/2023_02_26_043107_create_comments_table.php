@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->longText('comment')->nullable();
             $table->string('user_id')->nullable();
+            $table->string('post_id')->nullable();
             $table->timestamps();
         });
     }
