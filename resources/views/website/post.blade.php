@@ -32,6 +32,7 @@
                             <p>Categories: <a href="#">{{$post->category->name}}</a></p>
                         </div>
                         <div class="pt-5">
+
                             {{--              <h3 class="mb-5">6 Comments</h3>--}}
                             @foreach($comments as $comment)
                                 <ul class="comment-list">

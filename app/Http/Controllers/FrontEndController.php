@@ -8,6 +8,8 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Reply;
+use Illuminate\Support\Facades\DB;
+
 
 class FrontEndController extends Controller
 {
@@ -19,7 +21,8 @@ class FrontEndController extends Controller
     }
     public function post($slug )
     {
-        $post = Post::with('category', 'user')->where('slug', $slug)->first();
+        $post = Post::with('category', 'user','comment','comment.replies')->where('slug', $slug)->first();
+        //dd($post->toArray());
         if($post){
             $comments = Comment::orderBy('id','desc')->where('post_id',$post->id)->get();
             $replies = Reply::orderBy('id','asc')->where('post_id',$post->id)->get();
@@ -36,7 +39,6 @@ class FrontEndController extends Controller
     {
         if(Auth::id())
         {
-            //dd($request);
             $comment = new comment;
             $comment->name = Auth::user()->name;
             $comment->user_id = Auth::user()->id;

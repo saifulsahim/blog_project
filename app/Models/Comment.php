@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+    public function post()
+    {
+        return $this->belongsTo('App\Models\Post');
+    }
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply','comment_id');
+    }
+
+
 }
