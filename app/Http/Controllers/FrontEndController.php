@@ -23,12 +23,10 @@ class FrontEndController extends Controller
         if($post){
             $comments = Comment::orderBy('id','desc')->where('post_id',$post->id)->get();
             $replies = Reply::orderBy('id','asc')->where('post_id',$post->id)->get();
-           //$replies = Reply::all();
             return view('website.post',compact('post','comments','replies'));
         }else{
             return redirect('/');
         }
-
     }
     public function category()
     {
@@ -36,24 +34,21 @@ class FrontEndController extends Controller
     }
     public function add_comment(Request $request)
     {
-        //dd($request);
-        $comment = new comment;
-        $comment->name = Auth::user()->name;
-        $comment->user_id = Auth::user()->id;
-        $comment->comment = $request->comment;
-        $comment->post_id = $request->post_id;
-        //dd($comment);
-        $comment->save();
-        return redirect()->back();
+        if(Auth::id())
+        {
+            //dd($request);
+            $comment = new comment;
+            $comment->name = Auth::user()->name;
+            $comment->user_id = Auth::user()->id;
+            $comment->comment = $request->comment;
+            $comment->post_id = $request->post_id;
+            $comment->save();
+            return redirect()->back();
 
-//        if(Auth::id())
-//        {
-//
-//        }else{
-//            return redirect('login');
-//
-//        }
+        }else{
+            return redirect('login');
 
+        }
     }
     public function add_reply(Request $request)
     {
@@ -65,7 +60,6 @@ class FrontEndController extends Controller
             $reply->comment_id = $request->Commentid;
             $reply->post_id = $request->post_id;
             $reply->reply = $request->reply;
-           // dd($reply);
             $reply->save();
             return redirect()->back();
         } else {
@@ -73,7 +67,6 @@ class FrontEndController extends Controller
 
         }
     }
-
     public function logout(Request $request) {
         Auth::logout();
         return redirect('/login');

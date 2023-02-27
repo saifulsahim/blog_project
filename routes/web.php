@@ -16,21 +16,6 @@ use App\Http\Controllers\FrontEndController;
 |
 */
 Auth::routes();
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-//Route::get('/', function () {
-//    return view('website.home');
-//});
-//
-//Route::get('/category', function () {
-//    return view('website.category');
-//});
-//
-//Route::get('/post', function () {
-//    return view('website.post');
-//});
 Route::get('/', [App\Http\Controllers\FrontEndController::class, 'home']);
 Route::get('/category/{slug}', 'FrontEndController@category')->name('website.category');
 Route::get('/contact', 'FrontEndController@contact')->name('website.contact');
@@ -49,19 +34,6 @@ Route::get('/dashboard', function () {
     Route::resource('post',PostController::class);
 });
 
-/*
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-*/
 require __DIR__.'/auth.php';
-
-//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
